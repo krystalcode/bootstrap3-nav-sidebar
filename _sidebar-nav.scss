@@ -1,0 +1,170 @@
+/**
+ * Apply rules only when the sidebar-nav class is present in the body tag. This
+ * way the plugin can be easily enabled/disabled using javascript. It also helps
+ * with keeping the page's default left margins for the containers pushed to the
+ * right when hiding the sidebar nav; this is achieved by removing the
+ * sidebar-nav class when adding the sidebar-nav-hidden class.
+ */
+body.sidebar-nav {
+
+/**
+ * Display the main menu as a fixed sidebar above the point at which the navbar
+ * becomes uncollapsed.
+ */
+@media (min-width: $grid-float-breakpoint) {
+  /**
+   * The main menu is marked with the primary class. This class shouldn't be
+   * given to any other menu on the page.
+   */
+  .navbar-nav.sidebar {
+    position: fixed;
+    // 1px is added by the box-shadow.
+    top: $navbar-height + 1px;
+    left: 0;
+    width: $sidebar-menu-width;
+    height: 100%;
+    padding: $sidebar-menu-padding-vertical 0;
+    border-right: 1px solid $sidebar-menu-border-color;
+    background: $sidebar-menu-bg;
+    overflow-y: auto;
+
+    /**
+     * Adjustments needed for the first level menu items and their links.
+     */
+    > li {
+      // Disable left floating that is applied by default to navbar-nav first
+      // level li elements.
+      float: none;
+
+      > a {
+        padding: $sidebar-menu-padding-vertical $sidebar-menu-padding-horizontal;
+        color: $sidebar-menu-color;
+      }
+    }
+
+    /**
+     * Adjust link colors.
+     */
+    li {
+      &.active {
+        > a {
+          color: $sidebar-menu-color-active;
+          background-color: $sidebar-menu-bg-active;
+        }
+      }
+
+      a,
+      a:hover,
+      a:focus {
+        color: $sidebar-menu-color;
+      }
+
+      a:hover,
+      a:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /**
+   * The sidebar nav has fixed positioning and this can result other page
+   * elements to be hidden behind it. The "sidebar-nav-container" can be added
+   * to any containers (or other elements) such as the main content container or
+   * the main navbar container so that they get pushed to the right.
+   */
+  .sidebar-nav-container {
+    margin-left: $sidebar-menu-width;
+  }
+}
+
+/**
+ * The following rules (using the navbar default colors) are applied to the open
+ * dropdown menus when the navbar is collapsed to achieve the open/closed
+ * dropdown menu effect for the collapsed navbar. We want the same effect for
+ * the sidebar menu as well (instead of the default dropdown), so we apply them
+ * to screens larger than the breakpoint at which the navbar collapses as well.
+ *
+ * Some values are different (colors and paddings) so we wrap them in a media
+ * query so that the defaults are kept when the navbar is collapsed.
+ *
+ * @see bootstrap/assets/stylesheets/bootstrap/_navbar.scss.
+ */
+@media (min-width: $grid-float-breakpoint) {
+  .navbar-nav.sidebar {
+    .open .dropdown-menu {
+      position: static;
+      float: none;
+      width: auto;
+      margin-top: 0;
+      background-color: transparent;
+      border: 0;
+      box-shadow: none;
+
+      > li > a,
+      .dropdown-header {
+        padding: 5px 15px 5px 30px;
+      }
+
+      > li > a {
+        line-height: $line-height-computed;
+
+        &:hover,
+        &:focus {
+          background-image: none;
+        }
+      }
+    }
+  }
+
+  .navbar-default {
+    .navbar-nav.sidebar {
+      .open .dropdown-menu {
+        > li > a {
+          color: $sidebar-menu-color;
+
+          &:hover,
+          &:focus {
+            color: $sidebar-menu-color;
+            background-color: $sidebar-menu-bg;
+          }
+        }
+
+        > .active > a {
+          &,
+          &:hover,
+          &:focus {
+            color: $sidebar-menu-color-active;
+            background-color: $sidebar-menu-bg-active;
+          }
+        }
+
+        > .disabled > a {
+          &,
+          &:hover,
+          &:focus {
+            color: $navbar-default-link-disabled-color;
+            background-color: $navbar-default-link-disabled-bg;
+          }
+        }
+      }
+    }
+  }
+
+  // @Issue("Add support for navbar-inverse as well")
+}
+
+} // End of body.sidebar-nav
+
+/**
+ * The "sidebar-nav-hidden" class can be added to or removed from the body
+ * using javascript to toggle visibility of the primary menu.
+ *
+ * This rule is applied outside
+ */
+@media (min-width: $grid-float-breakpoint) {
+  body.sidebar-nav-hidden {
+    .navbar-nav.sidebar {
+      display: none;
+    }
+  }
+}

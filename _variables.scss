@@ -1,0 +1,14 @@
+// The width of the sidebar.
+$sidebar-menu-width: 220px !default;
+// Vertical padding used for the first level menu item links.
+$sidebar-menu-padding-vertical: $grid-gutter-width / 3 !default;
+// Horizontal padding used for the first level menu item links.
+$sidebar-menu-padding-horizontal: $grid-gutter-width / 3 * 2 !default;
+// Color of the right side border used to separate the menu from the content.
+$sidebar-menu-border-color: $gray-lighter !default;
+
+// Link colors.
+$sidebar-menu-color: $brand-primary !default;
+$sidebar-menu-bg: lighten(#f8f8f8, 2%) !default;
+$sidebar-menu-color-active: #fff !default;
+$sidebar-menu-bg-active: $sidebar-menu-color !default;
