@@ -54,7 +54,9 @@ body.sidebar-nav {
      */
     li {
       &.active {
-        > a {
+        > a,
+        > a:hover,
+        > a:focus {
           color: $sidebar-menu-color-active;
           background-color: $sidebar-menu-bg-active;
         }
@@ -64,6 +66,10 @@ body.sidebar-nav {
       a:hover,
       a:focus {
         color: $sidebar-menu-color;
+      }
+
+      a.dropdown-toggle:focus {
+        color: #fff;
       }
 
       a:hover,
