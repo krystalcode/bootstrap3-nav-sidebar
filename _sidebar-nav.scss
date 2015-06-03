@@ -68,13 +68,20 @@ body.sidebar-nav {
         color: $sidebar-menu-color;
       }
 
-      a.dropdown-toggle:focus {
-        color: #fff;
-      }
-
       a:hover,
       a:focus {
         text-decoration: underline;
+      }
+    }
+
+    /**
+     * Remove background color from open dropdown.
+     */
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: $sidebar-menu-bg;
       }
     }
   }
